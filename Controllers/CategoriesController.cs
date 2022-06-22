@@ -48,4 +48,13 @@ public class CategoriesController : Controller
         }
             return View(cat);
     }
+
+    [HttpPost("categories/{categoryId}/add")]
+    public IActionResult AddProd(int categoryId, ProdCatAssociation newAss)
+    {
+            newAss.CategoryId = categoryId;
+            _context.Associations.Add(newAss);
+            _context.SaveChanges();
+        return RedirectToAction("Index", "Home");
+    }
 }

@@ -1,5 +1,5 @@
 @model ProdCatAssociation
-<form asp-controller="Categories" asp-action="AddProd" asp-route-productId="@ViewBag.catName.CategoryId">
+<form asp-controller="Categories" asp-action="AddProd" asp-route-categoryId="@ViewBag.catName.CategoryId">
     <label asp-for="ProductId"></label>
     <span asp-validation-for="ProductId"></span>
     <select asp-for="ProductId">
