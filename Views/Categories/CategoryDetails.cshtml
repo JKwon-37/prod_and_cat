@@ -1,0 +1,14 @@
+<h1>@ViewBag.catName.Name</h1>
+<h3>Categories: </h3>
+<ul>
+    @foreach (ProdCatAssociation prod in Model.Associations)
+    {
+        <li>@prod.ProdA.Name</li>
+    }
+</ul>
+
+@{
+    ProdCatAssociation newProdForCat = new ProdCatAssociation();
+}
+
+<partial name="AddProdToCat" model="newProdForCat"/>

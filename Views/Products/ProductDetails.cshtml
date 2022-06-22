@@ -1,20 +1,15 @@
-@model Product
-<h1>@Model.Name</h1>
-
+<h1>@ViewBag.prodName.Name</h1>
 <h3>Categories: </h3>
+<ul>
+    @foreach (ProdCatAssociation cat in Model.Associations)
+    {
+        <li>@cat.CatA.Name</li>
+    }
+</ul>
 
+@{
+    ProdCatAssociation newCatForProd = new ProdCatAssociation();
+}
 
-<form asp-controller="Products" asp-action="AddCat" asp-route-productId="@Model.ProductId">
-    <label asp-for="ProductId"></label>
-    <span asp-validation-for="ProductId"></span>
-    <Select asp-for="ProductId">
-        @foreach (ProdCatAssociation cat in Model.Association)
-        {
-            <option value="@cat.Category.CategoryId">@cat.Category.Name</option>
-        }
-        <option value="ProductId"></option>
-    </Select>
-    <input class="btn-primary" type="submit" value="Add">
-</form>
-
+<partial name="AddCatToProd" model="newCatForProd"/>
 

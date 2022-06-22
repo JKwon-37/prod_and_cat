@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProdAndCat.Models;
 
@@ -10,9 +11,10 @@ using ProdAndCat.Models;
 namespace ProdAndCat.Migrations
 {
     [DbContext(typeof(ProdAndCatContext))]
-    partial class ProdAndCatContextModelSnapshot : ModelSnapshot
+    [Migration("20220622194636_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

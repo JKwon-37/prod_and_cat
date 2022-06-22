@@ -14,9 +14,8 @@ public class ProductsController : Controller
     [HttpGet("products")]
     public IActionResult ProductsPage()
     {
-        List<Product> productsList = _context.Products.ToList();
-        ViewBag.productsList = productsList;
-        return View("AllProducts");
+        List<Product> allPosts = _context.Products.ToList();
+        return View("AllProducts", allPosts);
     }
 
     [HttpPost("products/create")]
@@ -34,26 +33,28 @@ public class ProductsController : Controller
     [HttpGet("products/{productId}")]
     public IActionResult ProductDetails(int productId)
     {
-        Product? prod = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+        Product? prod = _context.Products
+        .Include(p => p.Associations).ThenInclude(p => p.CatA).FirstOrDefault(p => p.ProductId == productId);
+        List<Category> catList = _context.Categories
+            .Include(c => c.Associations)
+            .Where(c => !c.Associations.Any(a => a.ProductId == productId)).ToList();
+        ViewBag.prodName = prod;
+        ViewBag.catList = catList;
+
 
         if (prod == null)
         {
             return RedirectToAction("ProductsPage");
         }
-        return View(prod);
+            return View(prod);
     }
 
     [HttpPost("products/{productId}/add")]
-    public IActionResult AddCatToProd(int productId, int categoryId)
+    public IActionResult AddCat(int productId, ProdCatAssociation newAss)
     {
-        ProdCatAssociation? ass = new ProdCatAssociation()
-        {
-            ProductId = productId,
-            CategoryId = categoryId
-        };
-
-        _context.Associations.Add(ass);
-        _context.SaveChanges();
+            newAss.ProductId = productId;
+            _context.Associations.Add(newAss);
+            _context.SaveChanges();
         return RedirectToAction("Index", "Home");
     }
 }

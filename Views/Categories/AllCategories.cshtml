@@ -1,15 +1,17 @@
+@model List<Category>
 <p>
     <a asp-controller="Products" asp-action="ProductsPage">Products</a> | <a asp-controller="Categories" asp-action="CategoriesPage">Categories</a>
 </p>
 
 @{
-    Category newCategory = new Category();
+    Category newCat = new Category();
 }
-<partial name="CategoryForm" model="@newCategory"/>
 
-<h1>Existing Products</h1>
+<partial name="CategoryForm" model="newCat"/>
 
-@foreach (Category categories in ViewBag.allCategories)
+<h1>Existing Categories</h1>
+
+@foreach (Category categories in Model)
 {
     <a
     asp-controller="Category"

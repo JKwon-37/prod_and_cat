@@ -1,3 +1,5 @@
+@model List<Product>
+
 <p>
     <a asp-controller="Products" asp-action="ProductsPage">Products</a> | <a asp-controller="Categories" asp-action="CategoriesPage">Categories</a>
 </p>
@@ -9,11 +11,11 @@
 
 <h1>Existing Products</h1>
 
-@foreach (Product products in ViewBag.productsList)
+@foreach (Product product in Model)
 {
     <a
     asp-controller="Products"
     asp-action="ProductDetails"
-    asp-route-productId="@products.ProductId"
-    >@products.Name</a>
+    asp-route-productId="@product.ProductId"
+    >@product.Name</a>
 }
