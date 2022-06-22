@@ -1,0 +1,19 @@
+<p>
+    <a asp-controller="Products" asp-action="ProductsPage">Products</a> | <a asp-controller="Categories" asp-action="CategoriesPage">Categories</a>
+</p>
+
+@{
+    Category newCategory = new Category();
+}
+<partial name="CategoryForm" model="@newCategory"/>
+
+<h1>Existing Products</h1>
+
+@foreach (Category categories in ViewBag.allCategories)
+{
+    <a
+    asp-controller="Category"
+    asp-action="ViewCategory"
+    asp-route-productId="@categories.CategoryId"
+    >@categories.Name</a>
+}

@@ -1,0 +1,12 @@
+@model Category
+
+<h1>New Categories</h1>
+
+<form asp-controller="Categories" asp-action="CreateCategory">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <span class="val" asp-validation-for="Name"></span>
+        <input asp-for="Name" type="text"/>
+    </div>
+    <input class="btn-primary" type="submit" value="Create">
+</form>

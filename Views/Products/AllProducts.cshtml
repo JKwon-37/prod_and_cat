@@ -1,0 +1,19 @@
+<p>
+    <a asp-controller="Products" asp-action="ProductsPage">Products</a> | <a asp-controller="Categories" asp-action="CategoriesPage">Categories</a>
+</p>
+
+@{
+    Product newProduct = new Product();
+}
+<partial name="ProductForm" model="@newProduct"/>
+
+<h1>Existing Products</h1>
+
+@foreach (Product products in ViewBag.productsList)
+{
+    <a
+    asp-controller="Products"
+    asp-action="ProductDetails"
+    asp-route-productId="@products.ProductId"
+    >@products.Name</a>
+}

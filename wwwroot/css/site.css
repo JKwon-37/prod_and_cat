@@ -1,18 +1,14 @@
-html {
-  font-size: 14px;
+* {
+  background-color: black;
+  color: azure;
+  font-family: "Press Start 2P";
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.val {
+  color: red;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
+.current {
+  text-decoration: none;
+  font-weight: bolder;
 }
