@@ -11,11 +11,11 @@
 
 <h1>Existing Categories</h1>
 
-@foreach (Category categories in Model)
+@foreach (Category category in Model)
 {
     <a
-    asp-controller="Category"
-    asp-action="ViewCategory"
-    asp-route-productId="@categories.CategoryId"
-    >@categories.Name</a>
+    asp-controller="Categories"
+    asp-action="CategoryDetails"
+    asp-route-categoryId="@category.CategoryId"
+    >@category.Name</a>
 }

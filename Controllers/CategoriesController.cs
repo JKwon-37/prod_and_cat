@@ -31,20 +31,20 @@ public class CategoriesController : Controller
     }
 
     [HttpGet("categories/{categoryId}")]
-    public IActionResult CategoryDetails(int catId)
+    public IActionResult CategoryDetails(int categoryId)
     {
         Category? cat = _context.Categories
-        .Include(p => p.Associations).ThenInclude(p => p.ProdA).FirstOrDefault(p => p.CategoryId == catId);
-        List<Category> catList = _context.Categories
-            .Include(c => c.Associations)
-            .Where(c => !c.Associations.Any(a => a.CategoryId == catId)).ToList();
+        .Include(c => c.Associations).ThenInclude(p => p.ProdA).FirstOrDefault(c => c.CategoryId == categoryId);
+        List<Product> prodList = _context.Products
+            .Include(p => p.Associations)
+            .Where(p => !p.Associations.Any(a => a.CategoryId == categoryId)).ToList();
         ViewBag.catName = cat;
-        ViewBag.catList = catList;
+        ViewBag.prodList = prodList;
 
 
         if (cat == null)
         {
-            return RedirectToAction("ProductsPage");
+            return RedirectToAction("CategoriesPage");
         }
             return View(cat);
     }
