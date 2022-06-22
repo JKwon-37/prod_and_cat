@@ -34,26 +34,26 @@ public class ProductsController : Controller
     [HttpGet("products/{productId}")]
     public IActionResult ProductDetails(int productId)
     {
+        Product? prod = _context.Products.FirstOrDefault(p => p.ProductId == productId);
 
-        return View("ProductDetails");
+        if (prod == null)
+        {
+            return RedirectToAction("ProductsPage");
+        }
+        return View(prod);
     }
 
-    // [HttpPost("products/{productId}/add")]
-    // public IActionResult AddCatToProd(int productId, ProductCategoryAssociation Id)
-    // {
-    //     ProductCategoryAssociation? ExistingCatForProd = _context.Associations.FirstOrDefault(newCat => newCat.ProductId == productId);
-    //     List<Category> listCats = _context.Categories.ToList();
-    //     ViewBag.listCats = listCats;
-    //     if(ExistingCatForProd == null)
-    //     {
-    //         ProductCategoryAssociation AddCatToProd = new ProductCategoryAssociation()
-    //         {
-    //             ProductId = productId,
-    //             CategoryId = Id.CategoryId
-    //         };
-    //         _context.Associations.Add(AddCatToProd);
-    //         _context.SaveChanges();
-    //     }
-    //         return View("AddCatToProd");
-    // }
+    [HttpPost("products/{productId}/add")]
+    public IActionResult AddCatToProd(int productId, int categoryId)
+    {
+        ProdCatAssociation? ass = new ProdCatAssociation()
+        {
+            ProductId = productId,
+            CategoryId = categoryId
+        };
+
+        _context.Associations.Add(ass);
+        _context.SaveChanges();
+        return RedirectToAction("Index", "Home");
+    }
 }

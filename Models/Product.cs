@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 public class Product
 {
     [Key]
+    [Display(Name = "Add Category: ")]
     public int ProductId {get;set;}
 
     [Required(ErrorMessage = " must be required!")]
@@ -18,5 +19,5 @@ public class Product
     public DateTime CreatedAt {get;set;} = DateTime.Now;
     public DateTime UpdatedAt {get;set;} = DateTime.Now;
 
-    List<ProdCatAssociation> Association {get;set;} = new List<ProdCatAssociation>();
+    public List<ProdCatAssociation> Association {get;set;} = new List<ProdCatAssociation>();
 }
